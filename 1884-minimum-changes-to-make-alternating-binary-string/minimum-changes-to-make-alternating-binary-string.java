@@ -1,8 +1,6 @@
 class Solution {
     public int minOperations(String s) {
         int n=s.length();
-        int ones=(int)s.chars().filter(c->c=='1').count();
-        int zeros=n-ones;
         char ch='0';
         int count=0;
         for(char c:s.toCharArray()){
