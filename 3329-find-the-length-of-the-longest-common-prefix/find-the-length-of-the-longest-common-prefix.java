@@ -3,19 +3,19 @@ class Solution {
         Set<String>set=new HashSet<>();
         for(int n:arr1){
             String s=String.valueOf(n);
-            String temp="";
+            StringBuilder temp = new StringBuilder();
             for(int i=0;i<s.length();i++){
-                temp=temp+s.charAt(i);
-                set.add(temp);
+                temp.append(s.charAt(i));
+                set.add(temp.toString());
             }
         }
         int maxLen=0;
         for(int n:arr2){
             String s=String.valueOf(n);
-            String temp="";
+            StringBuilder temp = new StringBuilder();
             for(int i=0;i<s.length();i++){
-                temp=temp+s.charAt(i);
-                if(set.contains(temp)){
+                temp.append(s.charAt(i));
+                if(set.contains(temp.toString())){
                     maxLen=Math.max(maxLen,temp.length());
                 }
             }
