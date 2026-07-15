@@ -1,8 +1,8 @@
 class Solution {
     public int gcdOfOddEvenSums(int n) {
-        int oddSum=n*n;
-        int evenSum=n+n*n;
-        return gcd(oddSum,evenSum);
+        // int oddSum=n*n;
+        // int evenSum=n+n*n;
+        return n;
     }
     private int gcd(int a,int b){
         while (b != 0) {
