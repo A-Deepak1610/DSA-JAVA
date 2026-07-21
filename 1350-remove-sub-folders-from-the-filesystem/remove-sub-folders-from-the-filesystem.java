@@ -1,8 +1,7 @@
 class TrieNode {
         Map<String, TrieNode> children = new HashMap<>();
         boolean isFolder;
-    }
-
+}
 class Solution {
     TrieNode root = new TrieNode();
     public List<String> removeSubfolders(String[] folder) {
@@ -21,9 +20,9 @@ class Solution {
         TrieNode node = root;
         for (int i = 1; i < parts.length; i++) {
             // If a parent folder already exists
-            if (node.isFolder) {
-                return;
-            }
+            // if (node.isFolder) {
+            //     return;
+            // }
             node.children.putIfAbsent(
                 parts[i],
                 new TrieNode()
