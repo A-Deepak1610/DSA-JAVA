@@ -9,11 +9,17 @@ class Solution {
         if (st >= days.length)
             return 0;
         if(dp[st]!=-1)return dp[st];
-        int i1 = bs(days, days[st] + 6);
-        int i2 = bs(days, days[st] + 29);
+        int i1 = st;
+        while (i1 < days.length && days[i1] < days[st] + 7) {
+            i1++;
+        }
+        int i2 = st;
+        while (i2 < days.length && days[i2] < days[st] + 30) {
+            i2++;
+        }
         int c1 = cost[0] + minCost(days, cost, st + 1,dp);
-        int c2 = cost[1] + minCost(days, cost,i1+1,dp);
-        int c3 = cost[2] + minCost(days, cost,i2+1,dp);
+        int c2 = cost[1] + minCost(days, cost,i1,dp);
+        int c3 = cost[2] + minCost(days, cost,i2,dp);
         return dp[st]=Math.min(c1, Math.min(c2, c3));
     }
 
