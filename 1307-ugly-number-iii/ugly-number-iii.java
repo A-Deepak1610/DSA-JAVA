@@ -17,7 +17,7 @@ class Solution {
         return mid/a+mid/b+mid/c-mid/lcm(a,b)-mid/lcm(b,c)-mid/lcm(a,c)+mid/lcm(a,lcm(b,c));
     }
     private long lcm(long a,long b){
-        return a/gcd(a,b)*b;
+        return a*b/gcd(a,b);
     }
      private long gcd(long a, long b) {
         if (b == 0) return a;
