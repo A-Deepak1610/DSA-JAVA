@@ -1,28 +1,30 @@
 class Solution {
     public int maxDistance(int[] position, int m) {
-        int min=Arrays.stream(position).min().orElse(0);
-        int max=Arrays.stream(position).max().orElse(0);
         Arrays.sort(position);
-        int l=1,r=max-min;
-        int force=0;
-        while(l<=r){
-            int mid=l+(r-l)/2;
-            if(countBall(position,mid)>=m){
-                force=mid;
-                l=mid+1;
+        int low = 1;
+        int high = position[position.length - 1] - position[0];
+        int answer = 0;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (canPlace(position, m, mid)) {
+                answer = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
-            else r=mid-1;
         }
-        return force;
+        return answer;
     }
-    private int countBall(int[] arr,int k){
-        int count=1,d=arr[0];
-        for(int i=1;i<arr.length;i++){
-            if(arr[i]>=d+k){
+    private boolean canPlace(int[] arr, int m, int dist) {
+        int count = 1;
+        int last = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] - last >= dist) {
                 count++;
-                d=arr[i];
+                last = arr[i];
+                if (count == m) return true;
             }
         }
-        return count;
+        return false;
     }
 }
