@@ -29,6 +29,7 @@ class Solution {
             }
             return;
         }
+        if(dp[st]!=null&&!dp[st])return;
         for(int i=st;i<s.length();i++){
             String word=s.substring(st,i+1);
             if(set.contains(word)){
