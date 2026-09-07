@@ -23,8 +23,7 @@ class Solution {
         if(dp[i]!=-1)return dp[i];
         long ans=2L*solve(i-1)%mod;//take + dont take
         if(prev[i]!=-1){
-            ans-=solve(prev[i]-1);
-            if(ans<0)ans+=mod;
+             ans = (ans - solve(prev[i] - 1) + mod) % mod;
         }
         return dp[i]=(int)ans%mod;
     }
