@@ -17,11 +17,12 @@ class Solution {
         return maxLen;
     }
     private int solve(int[] arr,int i,int j){
+        if(dp[i][j]!=-1)return dp[i][j];
         int nxt=arr[i]+arr[j];
         int maxLen=0;
         if(map.containsKey(nxt)){
             maxLen=Math.max(maxLen,1+solve(arr,j,map.get(nxt)));
         }
-        return maxLen;
+        return dp[i][j]=maxLen;
     }
 }
