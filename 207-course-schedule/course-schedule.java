@@ -2,33 +2,34 @@ class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         return !isCyclic(numCourses,prerequisites);
     }
-    public boolean isCyclic(int V, int[][] edges) {
-        List<List<Integer>> adj=new ArrayList<>();
-        for(int i=0;i<V;i++)adj.add(new ArrayList<>());
-        for(int[] edge:edges){
-            int u=edge[0];
-            int v=edge[1];
-            adj.get(u).add(v);
+    int[] state;
+    public boolean isCyclic(int v, int[][] edges) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < v; i++) {
+            graph.add(new ArrayList<>());
         }
-        boolean[] visited=new boolean[V];
-        boolean[] path=new boolean[V];
-        for(int i=0;i<V;i++){
-            if(!visited[i]){
-                if(dfs(i,adj,visited,path))return true;
+        for (int[] edge : edges) {
+            graph.get(edge[0]).add(edge[1]);
+        }
+        state = new int[v];
+        for (int i = 0; i < v; i++) {
+            if (state[i] == 0 && hasCycle(graph, i)) {
+                return true;
             }
         }
         return false;
     }
-    private boolean dfs(int node,List<List<Integer>> adj,boolean[] visited,boolean[] path){
-        visited[node]=true;
-        path[node]=true;
-        for(int neighbor:adj.get(node)){
-            if(path[neighbor])return true;
-            if(!visited[neighbor]){
-                if(dfs(neighbor,adj,visited,path))return true;
+    private boolean hasCycle(List<List<Integer>> graph, int node) {
+        state[node] = 1;
+        for (int neighbor : graph.get(node)) {
+            if (state[neighbor] == 1) {
+                return true; // Back edge to the current DFS path
+            }
+            if (state[neighbor] == 0 && hasCycle(graph, neighbor)) {
+                return true;
             }
         }
-        path[node]=false;
+        state[node] = 2;
         return false;
     }
 }
