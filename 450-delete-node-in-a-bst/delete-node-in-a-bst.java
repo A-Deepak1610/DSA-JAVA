@@ -28,12 +28,13 @@ class Solution {
     private TreeNode helper(TreeNode root){
         if(root.left==null)return root.right;
         if(root.right==null)return root.left;
-        TreeNode lastRight=findLastRight(root.left);
-        lastRight.right=root.right;
-        return root.left;
+        TreeNode minNode=getMin(root.right);
+        root.val=minNode.val;
+        root.right=deleteNode(root.right,minNode.val);
+        return root;
     }
-    private TreeNode findLastRight(TreeNode root){
-        if(root.right==null)return root;
-        return findLastRight(root.right);
+    private TreeNode getMin(TreeNode root){
+        while(root.left!=null)root=root.left;
+        return root;
     }
 }
