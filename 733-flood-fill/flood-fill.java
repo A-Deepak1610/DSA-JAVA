@@ -1,31 +1,33 @@
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-        int m=image.length,n=image[0].length;
-        boolean[][] visited=new boolean[m][n];
-        Queue<int[]>queue=new LinkedList<>();
-        queue.add(new int[]{sr,sc});
-        while(!queue.isEmpty()){
-            int size=queue.size();
-            for(int i=0;i<size;i++){
-                int[] curr=queue.poll();
-                int currColor=image[curr[0]][curr[1]];
-                if(curr[0]+1<m&&image[curr[0]+1][curr[1]]==currColor&&!visited[curr[0]+1][curr[1]]){
-                    queue.add(new int[]{curr[0]+1,curr[1]});
-                    visited[curr[0]+1][curr[1]]=true;
+        int rows = image.length;
+        int cols = image[0].length;
+        int originalColor = image[sr][sc];
+        if (originalColor == color) {
+            return image;
+        }
+        int[][] directions = {
+            {1, 0},
+            {-1, 0},
+            {0, 1},
+            {0, -1}
+        };
+        Queue<int[]> queue = new ArrayDeque<>();
+        queue.offer(new int[]{sr, sc});
+        image[sr][sc] = color;
+        while (!queue.isEmpty()) {
+            int[] current = queue.poll();
+            int row = current[0];
+            int col = current[1];
+            for (int[] direction : directions) {
+                int newRow = row + direction[0];
+                int newCol = col + direction[1];
+                if (newRow >= 0 && newRow < rows &&
+                    newCol >= 0 && newCol < cols &&
+                    image[newRow][newCol] == originalColor) {
+                    image[newRow][newCol] = color;
+                    queue.offer(new int[]{newRow, newCol});
                 }
-                if(curr[0]-1>=0&&image[curr[0]-1][curr[1]]==currColor&&!visited[curr[0]-1][curr[1]]){
-                    queue.add(new int[]{curr[0]-1,curr[1]});
-                    visited[curr[0]-1][curr[1]]=true;
-                }
-                if(curr[1]+1<n&&image[curr[0]][curr[1]+1]==currColor&&!visited[curr[0]][curr[1]+1]){
-                    queue.add(new int[]{curr[0],curr[1]+1});
-                    visited[curr[0]][curr[1]+1]=true;
-                }
-                if(curr[1]-1>=0&&image[curr[0]][curr[1]-1]==currColor&&!visited[curr[0]][curr[1]-1]){
-                    queue.add(new int[]{curr[0],curr[1]-1});
-                    visited[curr[0]][curr[1]-1]=true;
-                }
-                image[curr[0]][curr[1]]=color;
             }
         }
         return image;
