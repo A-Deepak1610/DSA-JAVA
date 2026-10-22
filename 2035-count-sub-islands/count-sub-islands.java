@@ -19,6 +19,7 @@ class Solution {
         if (grid2[i][j] == 0) return true;
         boolean valid = grid1[i][j] == 1;
         grid2[i][j] = 0;
+        grid1[i][j] = 0;
         boolean up = dfs(grid1, grid2, i - 1, j);
         boolean down = dfs(grid1, grid2, i + 1, j);
         boolean left = dfs(grid1, grid2, i, j - 1);
