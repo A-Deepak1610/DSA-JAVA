@@ -8,7 +8,7 @@ class Solution {
             int u=time[0],v=time[1],w=time[2];
             graph[u].add(new int[]{v,w});
         }
-        PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->Integer.compare(a[1],b[1]));
+        Queue<int[]> pq=new LinkedList<>();
         pq.add(new int[]{k,0});
         distance[k]=0;
         distance[0]=0;
