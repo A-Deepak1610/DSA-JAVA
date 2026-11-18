@@ -10,7 +10,7 @@ class Solution {
                     currLen=1;
                 }
                 else{
-                    curr=s.charAt(i);
+                    if(i<s.length()-1)curr=s.charAt(i+1);
                     change++;
                     currLen=0;
                 }
